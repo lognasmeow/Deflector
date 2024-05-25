@@ -8,4 +8,9 @@ script = ExtResource("1_8iuxg")
 [node name="DeflectCooldown" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="UltimateChecker" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
 [connection signal="timeout" from="DeflectCooldown" to="." method="_on_deflect_cooldown_timeout"]
+[connection signal="timeout" from="UltimateChecker" to="." method="_on_ultimate_checker_timeout"]

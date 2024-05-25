@@ -2,6 +2,7 @@ extends Node2D
 
 signal miss
 signal attacking
+signal dead
 
 @onready var telegraphTimer: Timer = $Telegraph
 
@@ -21,6 +22,7 @@ func attack():
 func _on_player_deflecting():
 	if isTelegraphing:
 		telegraphTimer.stop()
+		emit_signal("dead")
 	else:
 		print("missed")
 		emit_signal("miss")
