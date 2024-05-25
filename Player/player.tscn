@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3xmpvw4nbyv4"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_8iuxg"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_8iuxg")
+
+[node name="DeflectCooldown" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="DeflectCooldown" to="." method="_on_deflect_cooldown_timeout"]
