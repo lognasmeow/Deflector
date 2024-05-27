@@ -5,6 +5,8 @@ signal dead
 signal usingUltimate
 
 @onready var deflectCooldownTimer: Timer = $DeflectCooldown
+@onready var ultimateAvailableTimer: Timer = $UltimateAvailable
+@onready var ultimateAvailableLastChanceTimer: Timer = $UltimateAvailableLastChance
 @onready var ultimateCheckerTimer: Timer = $UltimateChecker
 
 var deflectAvailable: bool = true
@@ -14,6 +16,7 @@ var spacePressed: bool = false
 var isInvincible: bool = false
 var ultimateCheckerTimerStarted: bool = false
 var ultimateReadyToUse: bool = false
+var ultimateReadyTime: float = 0
 
 func _process(delta):
 	if ultimateAvailable:
@@ -43,6 +46,20 @@ func handleDeflect():
 	if deflectAvailable:
 		print("deflecting")
 		emit_signal("deflecting")
+
+func handleUltimateAvailable():
+	ultimateAvailable = true
+	ultimateAvailableTimer.start()
+	print("ultimate available")
+	
+func handleUltimateAvailableLastChance():
+	ultimateAvailableLastChanceTimer.start()
+	print("last chance to use ultimate!")
+	
+func handleDidNotUseUltimate():
+	ultimateAvailable = false
+	print("didn't use ultimate")
+	
 		
 func showUltimateVisuals():
 	print("showing ultimate visuals")
@@ -50,10 +67,14 @@ func showUltimateVisuals():
 func useUltimate():
 	print("using ultimate")
 	emit_signal("usingUltimate")
+	heal(1)
 	ultimateCheckerTimerStarted = false
 	ultimateReadyToUse = false
 	ultimateAvailable = false
 
+func heal(healAmount: int):
+	health += healAmount
+	print("healing")
 		
 func takeDamage(damageAmount: int):
 	health -= damageAmount
@@ -79,5 +100,19 @@ func _on_enemy_attacking():
 
 func _on_ultimate_checker_timeout():
 	print("ultimate time")
+	ultimateAvailableTimer.stop()
+	ultimateAvailableLastChanceTimer.stop()
 	ultimateReadyToUse = true
 	showUltimateVisuals()
+
+
+func _on_map_main_ten_enemies_killed():
+	handleUltimateAvailable()
+
+
+func _on_ultimate_available_timeout():
+	handleUltimateAvailableLastChance()
+
+
+func _on_ultimate_available_last_chance_timeout():
+	handleDidNotUseUltimate()

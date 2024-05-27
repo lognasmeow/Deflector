@@ -7,6 +7,7 @@ signal dead
 @onready var telegraphTimer: Timer = $Telegraph
 @onready var restTimer: Timer = $Rest
 @onready var map: Node2D = $".."
+@onready var player: Node2D = $"../Player"
 
 var isTelegraphing: bool = true
 var startingSpawnTime: float = 5
@@ -20,7 +21,8 @@ func _ready():
 	
 func _process(delta):
 	if map.currentTime > 0:
-		print(startingSpawnTime / map.currentTime)
+		#print(startingSpawnTime / map.currentTime)
+		pass
 	
 func rest():
 	restTimer.start()
@@ -35,14 +37,18 @@ func attack():
 	emit_signal("attacking")
 	rest()
 	
+func die():
+	telegraphTimer.stop()
+	emit_signal("dead")
+	print("enemy dead")
 
 func _on_player_deflecting():
 	if isTelegraphing:
-		telegraphTimer.stop()
-		emit_signal("dead")
+		die()
 	else:
-		print("player missed")
-		emit_signal("miss")
+		if not player.ultimateAvailable:
+			print("player missed")
+			emit_signal("miss")
 
 
 func _on_telegraph_timeout():
@@ -52,3 +58,7 @@ func _on_telegraph_timeout():
 
 func _on_rest_timeout():
 	telegraphAttack()
+
+
+func _on_player_using_ultimate():
+	die()
