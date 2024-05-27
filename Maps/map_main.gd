@@ -18,3 +18,19 @@ func _process(delta):
 
 func _on_enemy_dead():
 	enemiesKilled += 1
+
+
+func _on_player_ultimate_is_available():
+	pass # show on UI
+
+
+func _on_player_healing():
+	pass # show on UI
+
+
+func _on_player_taking_damage():
+	pass # show on UI
+
+
+func _on_player_dead():
+	pass # show on UI

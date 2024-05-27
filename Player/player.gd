@@ -3,6 +3,9 @@ extends Node2D
 signal deflecting
 signal dead
 signal usingUltimate
+signal ultimateIsAvailable
+signal healing
+signal takingDamage
 
 @onready var deflectCooldownTimer: Timer = $DeflectCooldown
 @onready var ultimateAvailableTimer: Timer = $UltimateAvailable
@@ -50,6 +53,7 @@ func handleDeflect():
 func handleUltimateAvailable():
 	ultimateAvailable = true
 	ultimateAvailableTimer.start()
+	emit_signal("ultimateIsAvailable")
 	print("ultimate available")
 	
 func handleUltimateAvailableLastChance():
@@ -74,6 +78,7 @@ func useUltimate():
 
 func heal(healAmount: int):
 	health += healAmount
+	emit_signal("healing")
 	print("healing")
 		
 func takeDamage(damageAmount: int):
@@ -81,6 +86,8 @@ func takeDamage(damageAmount: int):
 	if health <= 0:
 		print("dead")
 		emit_signal("dead")
+	else:
+		emit_signal("takingDamage")
 
 
 func _on_deflect_cooldown_timeout():
