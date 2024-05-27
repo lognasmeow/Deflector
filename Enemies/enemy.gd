@@ -9,7 +9,7 @@ signal dead
 @onready var map: Node2D = $".."
 @onready var player: Node2D = $"../Player"
 
-var isTelegraphing: bool = true
+var isTelegraphing: bool = false
 var startingSpawnTime: float = 5
 
 func _ready():
