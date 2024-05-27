@@ -9,4 +9,9 @@ script = ExtResource("1_c847m")
 wait_time = 3.0
 one_shot = true
 
+[node name="Rest" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="timeout" from="Telegraph" to="." method="_on_telegraph_timeout"]
+[connection signal="timeout" from="Rest" to="." method="_on_rest_timeout"]
