@@ -11,7 +11,7 @@ script = ExtResource("1_k01aj")
 position = Vector2(337, 394)
 
 [node name="Enemies" type="Node2D" parent="."]
-position = Vector2(0, 112)
+position = Vector2(0, 150)
 script = ExtResource("3_3rwte")
 
 [node name="Spawn" type="Timer" parent="."]

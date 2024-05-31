@@ -16,6 +16,7 @@ var isTelegraphing: bool = false
 var startingSpawnTime: float = 5
 var isAlive: bool = true
 var jumpAnimationPlayed: bool = false
+var defaultWaitTime: float = 4
 
 func _ready():
 	spawnTimer.wait_time = startingSpawnTime / 3.5
@@ -87,12 +88,11 @@ func _on_player_using_ultimate():
 
 
 func _on_spawn_timeout():
-	if map.currentTime > 0:
-		restTimer.wait_time = startingSpawnTime / map.currentTime + 2
-		deadTimer.wait_time = startingSpawnTime / map.currentTime + 2
+	if map.enemiesKilled > 0:
+		restTimer.wait_time = defaultWaitTime / map.enemiesKilled
 	else:
-		restTimer.wait_time = startingSpawnTime / 1
-		deadTimer.wait_time = startingSpawnTime / 1
+		restTimer.wait_time = defaultWaitTime
+	deadTimer.wait_time = defaultWaitTime
 	rest()
 
 
