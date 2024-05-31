@@ -14,7 +14,7 @@ signal takingDamage
 
 var deflectAvailable: bool = true
 var health: int = 3
-var ultimateAvailable: bool = false
+var ultimateAvailable: bool = true
 var spacePressed: bool = false
 var isInvincible: bool = false
 var ultimateCheckerTimerStarted: bool = false

@@ -16,6 +16,7 @@ var isTelegraphing: bool = false
 var startingSpawnTime: float = 5
 var isAlive: bool = true
 var jumpAnimationPlayed: bool = false
+var randomSpawnSeconds: int = 1
 
 func _ready():
 	spawnTimer.wait_time = startingSpawnTime / 3.5
@@ -23,8 +24,8 @@ func _ready():
 	
 func _process(delta):
 	if position.y < 0:
-		position.y += 2.2
-		if not animationPlayer.is_playing():
+		position.y += 4.4
+		if not animationPlayer.is_playing() or animationPlayer.current_animation != "fall":
 			animationPlayer.play("fall")
 	else:
 		if not jumpAnimationPlayed:
@@ -50,6 +51,7 @@ func attack():
 	rest()
 	
 func die():
+	restTimer.stop()
 	telegraphTimer.stop()
 	isAlive = false
 	animationPlayer.play("die")
@@ -88,8 +90,8 @@ func _on_player_using_ultimate():
 
 func _on_spawn_timeout():
 	if map.currentTime > 0:
-		restTimer.wait_time = startingSpawnTime / map.currentTime
-		deadTimer.wait_time = startingSpawnTime / map.currentTime
+		restTimer.wait_time = startingSpawnTime / map.currentTime + 2
+		deadTimer.wait_time = startingSpawnTime / map.currentTime + 2
 	else:
 		restTimer.wait_time = startingSpawnTime / 1
 		deadTimer.wait_time = startingSpawnTime / 1
