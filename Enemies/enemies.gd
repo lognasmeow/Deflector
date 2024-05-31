@@ -3,6 +3,7 @@ extends Node2D
 @onready var player: Node2D = $"../Player"
 @onready var map: Node2D = $".."
 @onready var spawnTimer: Timer = $"../Spawn"
+@onready var anyEnemyTelegraphingTimer: Timer = $"../AnyEnemyTelegraphing"
 
 var enemy = preload("res://Enemies/enemy.tscn")
 var enemy1Taken: bool = false
@@ -11,6 +12,13 @@ var enemy3Taken: bool = false
 var enemy1X: int = 256
 var enemy2X: int = 448
 var enemy3X: int = 640
+var isAnyEnemyTelegraphing: bool = false
+
+func _process(delta):
+	if map.enemiesKilled > 0:
+		spawnTimer.wait_time = 4 / map.enemiesKilled
+	else:
+		spawnTimer.wait_time = 4
 
 func connectSignals(instance):
 	instance.attacking.connect(player._on_enemy_attacking)
@@ -32,11 +40,11 @@ func _on_spawn_timeout():
 		enemy2Taken = false
 		enemy3Taken = false
 		for i in get_children():
-			if i.position.x == 256:
+			if i.position.x == 256 and i.isAlive:
 				enemy1Taken = true
-			elif i.position.x == 448:
+			elif i.position.x == 448 and i.isAlive:
 				enemy2Taken = true
-			elif i.position.x == 640:
+			elif i.position.x == 640 and i.isAlive:
 				enemy3Taken = true
 		if not enemy1Taken:
 			spawnEnemy(256)
@@ -46,3 +54,7 @@ func _on_spawn_timeout():
 			spawnEnemy(640)
 	else:
 		spawnEnemy(256)
+
+
+func _on_any_enemy_telegraphing_timeout():
+	isAnyEnemyTelegraphing = false

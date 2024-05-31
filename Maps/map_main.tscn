@@ -17,9 +17,14 @@ script = ExtResource("3_3rwte")
 [node name="Spawn" type="Timer" parent="."]
 autostart = true
 
+[node name="AnyEnemyTelegraphing" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="tenEnemiesKilled" from="." to="Player" method="_on_map_main_ten_enemies_killed"]
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
 [connection signal="healing" from="Player" to="." method="_on_player_healing"]
 [connection signal="takingDamage" from="Player" to="." method="_on_player_taking_damage"]
 [connection signal="ultimateIsAvailable" from="Player" to="." method="_on_player_ultimate_is_available"]
 [connection signal="timeout" from="Spawn" to="Enemies" method="_on_spawn_timeout"]
+[connection signal="timeout" from="AnyEnemyTelegraphing" to="Enemies" method="_on_any_enemy_telegraphing_timeout"]
