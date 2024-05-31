@@ -1,7 +1,24 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1ka18gfrhea6"]
+[gd_scene load_steps=11 format=3 uid="uid://d1ka18gfrhea6"]
 
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_c847m"]
 [ext_resource type="Texture2D" uid="uid://bp7sp77mwbtc1" path="res://Assets/Enemies/fullSoldier.png" id="2_ycxjo"]
+
+[sub_resource type="Animation" id="Animation_xlorf"]
+resource_name = "die"
+length = 0.75
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33, 34]
+}
 
 [sub_resource type="Animation" id="Animation_qjgqg"]
 resource_name = "idle"
@@ -21,9 +38,9 @@ tracks/0/keys = {
 "values": [7, 8, 9, 10]
 }
 
-[sub_resource type="Animation" id="Animation_8cb8b"]
-resource_name = "telegraph"
-length = 0.6
+[sub_resource type="Animation" id="Animation_8p05h"]
+resource_name = "jump"
+length = 0.45
 step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -32,27 +49,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [24, 25, 26, 27]
-}
-
-[sub_resource type="Animation" id="Animation_xlorf"]
-resource_name = "die"
-length = 0.75
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [30, 31, 32, 33, 34]
+"values": [45, 46, 47]
 }
 
 [sub_resource type="Animation" id="Animation_ly1ub"]
@@ -73,23 +73,6 @@ tracks/0/keys = {
 "values": [14, 15, 16, 17, 18, 19]
 }
 
-[sub_resource type="Animation" id="Animation_8p05h"]
-resource_name = "jump"
-length = 0.45
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [45, 46, 47]
-}
-
 [sub_resource type="Animation" id="Animation_mwao4"]
 resource_name = "shoot"
 length = 0.75
@@ -107,9 +90,45 @@ tracks/0/keys = {
 "values": [2, 3, 4, 5, 6]
 }
 
+[sub_resource type="Animation" id="Animation_8cb8b"]
+resource_name = "telegraph"
+length = 0.6
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27]
+}
+
+[sub_resource type="Animation" id="Animation_4fxed"]
+resource_name = "fall"
+length = 0.15
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [45]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_60rd1"]
 _data = {
 "die": SubResource("Animation_xlorf"),
+"fall": SubResource("Animation_4fxed"),
 "idle": SubResource("Animation_qjgqg"),
 "jump": SubResource("Animation_8p05h"),
 "run": SubResource("Animation_ly1ub"),
@@ -128,12 +147,19 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="Spawn" type="Timer" parent="."]
+one_shot = true
+
+[node name="Dead" type="Timer" parent="."]
+one_shot = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+scale = Vector2(5, 5)
 texture = ExtResource("2_ycxjo")
 hframes = 7
 vframes = 7
-frame = 6
+frame = 48
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -142,3 +168,5 @@ libraries = {
 
 [connection signal="timeout" from="Telegraph" to="." method="_on_telegraph_timeout"]
 [connection signal="timeout" from="Rest" to="." method="_on_rest_timeout"]
+[connection signal="timeout" from="Spawn" to="." method="_on_spawn_timeout"]
+[connection signal="timeout" from="Dead" to="." method="_on_dead_timeout"]

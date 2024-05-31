@@ -6,23 +6,33 @@ signal dead
 
 @onready var telegraphTimer: Timer = $Telegraph
 @onready var restTimer: Timer = $Rest
-@onready var map: Node2D = $".."
-@onready var player: Node2D = $"../Player"
+@onready var spawnTimer: Timer = $Spawn
+@onready var deadTimer: Timer = $Dead
+@onready var map: Node2D = $"../.."
+@onready var player: Node2D = $"../../Player"
+@onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 
 var isTelegraphing: bool = false
 var startingSpawnTime: float = 5
+var isAlive: bool = true
+var jumpAnimationPlayed: bool = false
 
 func _ready():
-	if map.currentTime > 0:
-		print(startingSpawnTime / map.currentTime)
-	else:
-		print(startingSpawnTime / 1)
-	rest()
+	spawnTimer.wait_time = startingSpawnTime / 3.5
+	spawnTimer.start()
 	
 func _process(delta):
-	if map.currentTime > 0:
-		#print(startingSpawnTime / map.currentTime)
-		pass
+	if position.y < 0:
+		position.y += 2.2
+		if not animationPlayer.is_playing():
+			animationPlayer.play("fall")
+	else:
+		if not jumpAnimationPlayed:
+			animationPlayer.play("jump")
+			jumpAnimationPlayed = true
+		
+	if not animationPlayer.is_playing() and jumpAnimationPlayed and isAlive:
+		animationPlayer.play("idle")
 	
 func rest():
 	restTimer.start()
@@ -39,8 +49,18 @@ func attack():
 	
 func die():
 	telegraphTimer.stop()
+	isAlive = false
+	animationPlayer.play("die")
 	emit_signal("dead")
 	print("enemy dead")
+	deadTimer.start()
+	
+func respawn():
+	isAlive = true
+	isTelegraphing = false
+	jumpAnimationPlayed = false
+	position.y = -200
+	spawnTimer.start()
 
 func _on_player_deflecting():
 	if isTelegraphing:
@@ -62,3 +82,17 @@ func _on_rest_timeout():
 
 func _on_player_using_ultimate():
 	die()
+
+
+func _on_spawn_timeout():
+	if map.currentTime > 0:
+		restTimer.wait_time = startingSpawnTime / map.currentTime
+		deadTimer.wait_time = startingSpawnTime / map.currentTime
+	else:
+		restTimer.wait_time = startingSpawnTime / 1
+		deadTimer.wait_time = startingSpawnTime / 1
+	rest()
+
+
+func _on_dead_timeout():
+	respawn()

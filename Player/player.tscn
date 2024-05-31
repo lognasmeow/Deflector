@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3xmpvw4nbyv4"]
+[gd_scene load_steps=3 format=3 uid="uid://b3xmpvw4nbyv4"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_8iuxg"]
+[ext_resource type="Texture2D" uid="uid://c6dbcb3exedw1" path="res://Assets/Weapons/CyberSword.png" id="2_p6bub"]
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_8iuxg")
@@ -19,6 +20,11 @@ one_shot = true
 [node name="UltimateChecker" type="Timer" parent="."]
 wait_time = 0.75
 one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 9.6)
+texture = ExtResource("2_p6bub")
 
 [connection signal="timeout" from="DeflectCooldown" to="." method="_on_deflect_cooldown_timeout"]
 [connection signal="timeout" from="UltimateAvailable" to="." method="_on_ultimate_available_timeout"]
