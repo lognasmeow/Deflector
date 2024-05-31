@@ -41,9 +41,11 @@ func rest():
 func telegraphAttack():
 	telegraphTimer.start()
 	isTelegraphing = true
+	animationPlayer.play("telegraph")
 	print("enemy telegraphing attack")
 	
 func attack():
+	animationPlayer.play("shoot")
 	emit_signal("attacking")
 	rest()
 	
