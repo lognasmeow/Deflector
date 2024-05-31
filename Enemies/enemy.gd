@@ -51,13 +51,14 @@ func attack():
 	rest()
 	
 func die():
-	restTimer.stop()
-	telegraphTimer.stop()
-	isAlive = false
-	animationPlayer.play("die")
-	emit_signal("dead")
-	print("enemy dead")
-	deadTimer.start()
+	if isAlive:
+		restTimer.stop()
+		telegraphTimer.stop()
+		isAlive = false
+		animationPlayer.play("die")
+		emit_signal("dead")
+		print("enemy dead")
+		deadTimer.start()
 	
 func respawn():
 	isAlive = true
