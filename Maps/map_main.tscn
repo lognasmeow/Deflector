@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://biwcqqp45njwv"]
+[gd_scene load_steps=15 format=3 uid="uid://biwcqqp45njwv"]
 
 [ext_resource type="Script" path="res://Maps/map_main.gd" id="1_k01aj"]
 [ext_resource type="PackedScene" uid="uid://b3xmpvw4nbyv4" path="res://Player/player.tscn" id="1_xy87o"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://chb87mdswqoda" path="res://Assets/UI/Containers/betterscreenhud02.png" id="6_s2ars"]
 [ext_resource type="Texture2D" uid="uid://bc6wo1ymo6roj" path="res://Assets/UI/Containers/slot_2_UI.png" id="7_1fh5x"]
 [ext_resource type="PackedScene" uid="uid://d2s4afa1021yq" path="res://UI/Tablet/tablet.tscn" id="9_lc1iw"]
+[ext_resource type="Texture2D" uid="uid://duye17t5bnprw" path="res://Assets/Backgrounds/cyberpunk-street.png" id="10_4n84l"]
 [ext_resource type="Theme" uid="uid://poj0k2rqrxmj" path="res://Assets/UI/Themes/cyberphont.tres" id="10_7i24s"]
+[ext_resource type="Texture2D" uid="uid://4msdsj733hyu" path="res://Assets/Overlays/6.png" id="11_8whw4"]
 
 [sub_resource type="Animation" id="Animation_ct1jb"]
 resource_name = "showTexture"
@@ -132,6 +134,29 @@ z_index = 100
 texture_filter = 1
 position = Vector2(116.17, 61)
 scale = Vector2(1.795, 1.5)
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Environment"]
+modulate = Color(0.107911, 0.459863, 1, 1)
+self_modulate = Color(0.707967, 0.707967, 0.707967, 1)
+z_index = -2
+texture_filter = 1
+offset_left = -1561.0
+offset_top = -10.0
+offset_right = -953.0
+offset_bottom = 182.0
+scale = Vector2(4, 4)
+texture = ExtResource("10_4n84l")
+
+[node name="TextureRect2" type="TextureRect" parent="Environment"]
+modulate = Color(1, 1, 1, 0.384314)
+z_index = -1
+offset_left = -794.0
+offset_top = -66.0
+offset_right = 1006.0
+offset_bottom = 1134.0
+texture = ExtResource("11_8whw4")
 
 [connection signal="tenEnemiesKilled" from="." to="Player" method="_on_map_main_ten_enemies_killed"]
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
