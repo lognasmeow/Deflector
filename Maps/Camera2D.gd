@@ -4,7 +4,7 @@ extends Camera2D
 
 var shakeAmount: float = 0
 
-func _process(delta):
+func _process(_delta):
 	offset = Vector2(randf_range(-1, 1) * shakeAmount , randf_range(-1, 1) * shakeAmount)
 	
 func shake(time: float, amount: float):
@@ -20,7 +20,7 @@ func _on_enemy_dead():
 
 func _on_shake_timeout():
 	set_process(false)
-	get_tree().create_tween().interpolate_value(self, "offset", 1, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	Tween.interpolate_value(self, "offset", 1, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
 
 
 func _on_player_dead():

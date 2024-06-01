@@ -19,7 +19,7 @@ var enemy5X: int = 544
 var enemy3X: int = 640
 var isAnyEnemyTelegraphing: bool = false
 
-func _process(delta):
+func _process(_delta):
 	if map.enemiesKilled > 0:
 		spawnTimer.wait_time = 5 / map.enemiesKilled
 	else:

@@ -12,10 +12,12 @@ signal takingDamage
 @onready var ultimateCheckerTimer: Timer = $UltimateChecker
 @onready var bobUpTimer: Timer = $BobUp
 @onready var bobDownTimer: Timer = $BobDown
+@onready var textureAnimationPlayer: AnimationPlayer = $"../Camera2D/TextureRect/Texture"
+
 
 var deflectAvailable: bool = true
 var health: int = 1
-var ultimateAvailable: bool = false
+var ultimateAvailable: bool = true
 var spacePressed: bool = false
 var isInvincible: bool = false
 var ultimateCheckerTimerStarted: bool = false
@@ -25,9 +27,9 @@ var currentDeflectionAnimationPosition: int = 2
 var bobUp: bool = true
 
 func _ready():
-	position.x = 322
+	setSwordPosition(randf_range(280, 350), randf_range(350, 394), 41.1, 2)
 
-func _process(delta):
+func _process(_delta):
 	if bobUp:
 		position.y += 0.3
 	else:
@@ -85,8 +87,7 @@ func setRandomCurrentDeflectionAnimationPosition(position1, position2):
 	else:
 		currentDeflectionAnimationPosition = position2
 
-func setSwordPosition(positionX: float, positionY: float, rotationDegrees: float, animationPosition: int):
-	var tweenSpeed: float = 0.02
+func setSwordPosition(positionX: float, positionY: float, rotationDegrees: float, animationPosition: int, tweenSpeed: float = 0.02):
 	get_tree().create_tween().tween_property(self, "position:x", positionX, tweenSpeed)
 	get_tree().create_tween().tween_property(self, "position:y", positionY, tweenSpeed)
 	get_tree().create_tween().tween_property(self, "rotation", deg_to_rad(rotationDegrees), tweenSpeed)
@@ -109,10 +110,14 @@ func handleDidNotUseUltimate():
 		
 func showUltimateVisuals():
 	print("showing ultimate visuals")
+	setSwordPosition(400, 380, 102.8, 2, 0.7)
+	textureAnimationPlayer.play("showTexture")
 		
 func useUltimate():
 	print("using ultimate")
 	emit_signal("usingUltimate")
+	setSwordPosition(150, 380, 102.8, 2, 0.02)
+	textureAnimationPlayer.play("RESET")
 	ultimateCheckerTimerStarted = false
 	ultimateReadyToUse = false
 	ultimateAvailable = false

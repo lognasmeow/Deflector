@@ -1,17 +1,55 @@
-[gd_scene load_steps=5 format=3 uid="uid://biwcqqp45njwv"]
+[gd_scene load_steps=9 format=3 uid="uid://biwcqqp45njwv"]
 
 [ext_resource type="Script" path="res://Maps/map_main.gd" id="1_k01aj"]
 [ext_resource type="PackedScene" uid="uid://b3xmpvw4nbyv4" path="res://Player/player.tscn" id="1_xy87o"]
 [ext_resource type="Script" path="res://Enemies/enemies.gd" id="3_3rwte"]
 [ext_resource type="Script" path="res://Maps/Camera2D.gd" id="4_75gfh"]
+[ext_resource type="Texture2D" uid="uid://b34fg6igo281f" path="res://Assets/Overlays/BloodOverlay.png" id="5_l0pm6"]
+
+[sub_resource type="Animation" id="Animation_ct1jb"]
+resource_name = "showTexture"
+length = 3.0
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_iccox"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8bwg3"]
+_data = {
+"RESET": SubResource("Animation_iccox"),
+"showTexture": SubResource("Animation_ct1jb")
+}
 
 [node name="MapMain" type="Node2D"]
 script = ExtResource("1_k01aj")
 
 [node name="Player" parent="." instance=ExtResource("1_xy87o")]
 z_index = 99
-position = Vector2(322, 394)
-rotation = 0.71733
+position = Vector2(432, 399)
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(0, 150)
@@ -29,6 +67,21 @@ position = Vector2(320, 240)
 script = ExtResource("4_75gfh")
 
 [node name="Shake" type="Timer" parent="Camera2D"]
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D"]
+modulate = Color(0, 0, 0, 0)
+texture_filter = 1
+offset_left = -394.0
+offset_top = -241.0
+offset_right = 886.0
+offset_bottom = 559.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_l0pm6")
+
+[node name="Texture" type="AnimationPlayer" parent="Camera2D/TextureRect"]
+libraries = {
+"": SubResource("AnimationLibrary_8bwg3")
+}
 
 [connection signal="tenEnemiesKilled" from="." to="Player" method="_on_map_main_ten_enemies_killed"]
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]

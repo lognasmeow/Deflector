@@ -9,7 +9,7 @@ var enemiesKilled: float = 0
 func _ready():
 	timeStart = int(Time.get_unix_time_from_system())
 
-func _process(delta):
+func _process(_delta):
 	currentTime = int(Time.get_unix_time_from_system()) - timeStart
 	if int(enemiesKilled) % 10 == 0 and enemiesKilled > 0:
 		emit_signal("tenEnemiesKilled")

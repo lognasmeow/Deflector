@@ -22,7 +22,7 @@ func _ready():
 	spawnTimer.wait_time = startingSpawnTime / 3.5
 	spawnTimer.start()
 	
-func _process(delta):
+func _process(_delta):
 	if position.y < 0:
 		position.y += 4.4
 		if not animationPlayer.is_playing() or animationPlayer.current_animation != "fall":
