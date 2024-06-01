@@ -137,16 +137,16 @@ scale = Vector2(1.795, 1.5)
 
 [node name="Environment" type="Node2D" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="Environment"]
+[node name="TextureRect3" type="TextureRect" parent="Environment"]
 modulate = Color(0.107911, 0.459863, 1, 1)
 self_modulate = Color(0.707967, 0.707967, 0.707967, 1)
 z_index = -2
 texture_filter = 1
-offset_left = -1561.0
-offset_top = -10.0
-offset_right = -953.0
-offset_bottom = 182.0
-scale = Vector2(4, 4)
+offset_left = -2144.0
+offset_top = -63.63
+offset_right = -1536.0
+offset_bottom = 128.37
+scale = Vector2(9.22, 9.22)
 texture = ExtResource("10_4n84l")
 
 [node name="TextureRect2" type="TextureRect" parent="Environment"]
