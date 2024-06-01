@@ -32,6 +32,7 @@ script = ExtResource("4_75gfh")
 
 [connection signal="tenEnemiesKilled" from="." to="Player" method="_on_map_main_ten_enemies_killed"]
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
+[connection signal="dead" from="Player" to="Camera2D" method="_on_player_dead"]
 [connection signal="takingDamage" from="Player" to="." method="_on_player_taking_damage"]
 [connection signal="ultimateIsAvailable" from="Player" to="." method="_on_player_ultimate_is_available"]
 [connection signal="timeout" from="Spawn" to="Enemies" method="_on_spawn_timeout"]

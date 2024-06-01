@@ -21,3 +21,7 @@ func _on_enemy_dead():
 func _on_shake_timeout():
 	set_process(false)
 	get_tree().create_tween().interpolate_value(self, "offset", 1, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
+
+
+func _on_player_dead():
+	shake(2, 6)
