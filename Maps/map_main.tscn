@@ -8,7 +8,9 @@
 script = ExtResource("1_k01aj")
 
 [node name="Player" parent="." instance=ExtResource("1_xy87o")]
-position = Vector2(337, 394)
+z_index = 99
+position = Vector2(322, 394)
+rotation = 0.71733
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(0, 150)
@@ -23,7 +25,6 @@ one_shot = true
 
 [connection signal="tenEnemiesKilled" from="." to="Player" method="_on_map_main_ten_enemies_killed"]
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
-[connection signal="healing" from="Player" to="." method="_on_player_healing"]
 [connection signal="takingDamage" from="Player" to="." method="_on_player_taking_damage"]
 [connection signal="ultimateIsAvailable" from="Player" to="." method="_on_player_ultimate_is_available"]
 [connection signal="timeout" from="Spawn" to="Enemies" method="_on_spawn_timeout"]

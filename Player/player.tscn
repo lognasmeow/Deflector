@@ -21,6 +21,15 @@ one_shot = true
 wait_time = 0.75
 one_shot = true
 
+[node name="BobUp" type="Timer" parent="."]
+wait_time = 1.4
+one_shot = true
+autostart = true
+
+[node name="BobDown" type="Timer" parent="."]
+wait_time = 1.4
+one_shot = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(4, 9.6)
@@ -30,3 +39,5 @@ texture = ExtResource("2_p6bub")
 [connection signal="timeout" from="UltimateAvailable" to="." method="_on_ultimate_available_timeout"]
 [connection signal="timeout" from="UltimateAvailableLastChance" to="." method="_on_ultimate_available_last_chance_timeout"]
 [connection signal="timeout" from="UltimateChecker" to="." method="_on_ultimate_checker_timeout"]
+[connection signal="timeout" from="BobUp" to="." method="_on_bob_up_timeout"]
+[connection signal="timeout" from="BobDown" to="." method="_on_bob_down_timeout"]

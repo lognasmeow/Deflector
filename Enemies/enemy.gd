@@ -89,7 +89,7 @@ func _on_player_using_ultimate():
 
 func _on_spawn_timeout():
 	if map.enemiesKilled > 0:
-		restTimer.wait_time = defaultWaitTime / map.enemiesKilled
+		restTimer.wait_time = defaultWaitTime / map.enemiesKilled + randf_range(0.1, 5)
 	else:
 		restTimer.wait_time = defaultWaitTime
 	deadTimer.wait_time = defaultWaitTime
