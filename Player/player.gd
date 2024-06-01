@@ -4,7 +4,6 @@ signal deflecting
 signal dead
 signal usingUltimate
 signal ultimateIsAvailable
-signal takingDamage
 
 @onready var deflectCooldownTimer: Timer = $DeflectCooldown
 @onready var ultimateAvailableTimer: Timer = $UltimateAvailable
@@ -17,7 +16,7 @@ signal takingDamage
 
 var deflectAvailable: bool = true
 var health: int = 1
-var ultimateAvailable: bool = true
+var ultimateAvailable: bool = false
 var spacePressed: bool = false
 var isInvincible: bool = false
 var ultimateCheckerTimerStarted: bool = false
@@ -127,8 +126,6 @@ func takeDamage(damageAmount: int):
 	if health <= 0:
 		print("dead")
 		emit_signal("dead")
-	else:
-		emit_signal("takingDamage")
 
 
 func _on_deflect_cooldown_timeout():

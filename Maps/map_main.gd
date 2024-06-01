@@ -2,31 +2,37 @@ extends Node2D
 
 signal tenEnemiesKilled
 
+@onready var killsLabel: Label = $UI/Kills/KillsLabel
+
 var timeStart = 0
 var currentTime = 0
 var enemiesKilled: float = 0
+var enemiesKilledSinceLastUltimate: float = 0
+var enemiesKilledAlreadyReached: bool = false
 
 func _ready():
 	timeStart = int(Time.get_unix_time_from_system())
+	emit_signal("tenEnemiesKilled")
 
 func _process(_delta):
 	currentTime = int(Time.get_unix_time_from_system()) - timeStart
-	if int(enemiesKilled) % 10 == 0 and enemiesKilled > 0:
-		emit_signal("tenEnemiesKilled")
-		print("ten enemies Killed")
 
 
 func _on_enemy_dead():
 	enemiesKilled += 1
-
-
-func _on_player_ultimate_is_available():
-	pass # show on UI
-
-
-func _on_player_taking_damage():
-	pass # show on UI
+	enemiesKilledSinceLastUltimate += 1
+	killsLabel.text = str(enemiesKilled)
+	if enemiesKilledSinceLastUltimate >= 15 and not enemiesKilledAlreadyReached:
+		emit_signal("tenEnemiesKilled")
+		print("ten enemies Killed")
+		enemiesKilledAlreadyReached = true
 
 
 func _on_player_dead():
 	pass # show on UI
+
+
+func _on_player_using_ultimate():
+	enemiesKilledSinceLastUltimate = 0
+	enemiesKilledAlreadyReached = false
+	

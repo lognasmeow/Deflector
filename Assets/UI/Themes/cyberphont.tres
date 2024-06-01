@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://poj0k2rqrxmj"]
+
+[ext_resource type="FontFile" uid="uid://c15p6qoeqc2t0" path="res://Assets/UI/Fonts/Cyberphont 3.0 B.ttf" id="1_cfkl1"]
+
+[resource]
+default_font = ExtResource("1_cfkl1")
+default_font_size = 40
