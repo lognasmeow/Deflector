@@ -12,7 +12,7 @@ signal takingDamage
 @onready var ultimateCheckerTimer: Timer = $UltimateChecker
 @onready var bobUpTimer: Timer = $BobUp
 @onready var bobDownTimer: Timer = $BobDown
-@onready var textureAnimationPlayer: AnimationPlayer = $"../Camera2D/TextureRect/Texture"
+@onready var textureAnimationPlayer: AnimationPlayer = $"../Camera2D/BloodTextureRect/Texture"
 
 
 var deflectAvailable: bool = true
