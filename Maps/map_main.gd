@@ -12,7 +12,6 @@ var enemiesKilledAlreadyReached: bool = false
 
 func _ready():
 	timeStart = int(Time.get_unix_time_from_system())
-	emit_signal("tenEnemiesKilled")
 
 func _process(_delta):
 	currentTime = int(Time.get_unix_time_from_system()) - timeStart
