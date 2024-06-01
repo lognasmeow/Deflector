@@ -4,6 +4,7 @@ extends Node2D
 @onready var map: Node2D = $".."
 @onready var spawnTimer: Timer = $"../Spawn"
 @onready var anyEnemyTelegraphingTimer: Timer = $"../AnyEnemyTelegraphing"
+@onready var camera: Camera2D = $"../Camera2D"
 
 var enemy = preload("res://Enemies/enemy.tscn")
 var enemy1Taken: bool = false
@@ -28,6 +29,7 @@ func connectSignals(instance):
 	instance.attacking.connect(player._on_enemy_attacking)
 	instance.miss.connect(player._on_enemy_miss)
 	instance.dead.connect(map._on_enemy_dead)
+	instance.dead.connect(camera._on_enemy_dead)
 	player.deflecting.connect(instance._on_player_deflecting)
 	player.usingUltimate.connect(instance._on_player_using_ultimate)
 

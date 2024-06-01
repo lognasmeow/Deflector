@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://biwcqqp45njwv"]
+[gd_scene load_steps=5 format=3 uid="uid://biwcqqp45njwv"]
 
 [ext_resource type="Script" path="res://Maps/map_main.gd" id="1_k01aj"]
 [ext_resource type="PackedScene" uid="uid://b3xmpvw4nbyv4" path="res://Player/player.tscn" id="1_xy87o"]
 [ext_resource type="Script" path="res://Enemies/enemies.gd" id="3_3rwte"]
+[ext_resource type="Script" path="res://Maps/Camera2D.gd" id="4_75gfh"]
 
 [node name="MapMain" type="Node2D"]
 script = ExtResource("1_k01aj")
@@ -23,9 +24,16 @@ autostart = true
 wait_time = 0.5
 one_shot = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 240)
+script = ExtResource("4_75gfh")
+
+[node name="Shake" type="Timer" parent="Camera2D"]
+
 [connection signal="tenEnemiesKilled" from="." to="Player" method="_on_map_main_ten_enemies_killed"]
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
 [connection signal="takingDamage" from="Player" to="." method="_on_player_taking_damage"]
 [connection signal="ultimateIsAvailable" from="Player" to="." method="_on_player_ultimate_is_available"]
 [connection signal="timeout" from="Spawn" to="Enemies" method="_on_spawn_timeout"]
 [connection signal="timeout" from="AnyEnemyTelegraphing" to="Enemies" method="_on_any_enemy_telegraphing_timeout"]
+[connection signal="timeout" from="Camera2D/Shake" to="Camera2D" method="_on_shake_timeout"]
