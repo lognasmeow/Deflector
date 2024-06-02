@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://biwcqqp45njwv"]
+[gd_scene load_steps=26 format=3 uid="uid://biwcqqp45njwv"]
 
 [ext_resource type="Script" path="res://Maps/map_main.gd" id="1_k01aj"]
 [ext_resource type="PackedScene" uid="uid://b3xmpvw4nbyv4" path="res://Player/player.tscn" id="1_xy87o"]
@@ -12,6 +12,7 @@
 [ext_resource type="Theme" uid="uid://poj0k2rqrxmj" path="res://Assets/UI/Themes/cyberphont.tres" id="10_7i24s"]
 [ext_resource type="Texture2D" uid="uid://bkbed8cixjat2" path="res://Assets/UI/Containers/menu_button02.png" id="10_hmtfa"]
 [ext_resource type="Texture2D" uid="uid://4msdsj733hyu" path="res://Assets/Overlays/6.png" id="11_8whw4"]
+[ext_resource type="AudioStream" uid="uid://dg3gjsbd05jso" path="res://Assets/Sound/Music/AMBIENCE_UNDERGROUND_POWER_STATION_LOOP.wav" id="13_4iixw"]
 [ext_resource type="AudioStream" uid="uid://bh5r0a6u5cmxn" path="res://Assets/Sound/Sound Effects/DirectAttack.wav" id="13_t0gqe"]
 [ext_resource type="AudioStream" uid="uid://c31j28ikf1ktl" path="res://Assets/Sound/Sound Effects/CoordinatesReceived.wav" id="14_8or11"]
 [ext_resource type="AudioStream" uid="uid://baw4vec6c7p3u" path="res://Assets/Sound/Sound Effects/DigitalRearrange.wav" id="14_47etn"]
@@ -252,6 +253,11 @@ offset_bottom = 1134.0
 texture = ExtResource("11_8whw4")
 
 [node name="Sound" type="Node2D" parent="."]
+
+[node name="Ambience" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("13_4iixw")
+autoplay = true
+bus = &"Music"
 
 [node name="DirectAttack" type="AudioStreamPlayer2D" parent="Sound"]
 stream = ExtResource("13_t0gqe")
