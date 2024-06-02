@@ -14,6 +14,7 @@ var enemiesKilledAlreadyReached: bool = false
 var pressSpaceToRestart: bool = false
 
 func _ready():
+	deathAnimationPlayer.play("RESET")
 	timeStart = int(Time.get_unix_time_from_system())
 
 func _process(_delta):
@@ -35,6 +36,7 @@ func _on_enemy_dead():
 
 
 func _on_player_dead():
+	deathAnimationPlayer.play("showDeathUI")
 	deathTimer.start()
 
 
