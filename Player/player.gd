@@ -4,6 +4,7 @@ signal deflecting
 signal dead
 signal usingUltimate
 signal ultimateIsAvailable
+signal didNotUseUltimate
 
 @onready var deflectCooldownTimer: Timer = $DeflectCooldown
 @onready var ultimateAvailableTimer: Timer = $UltimateAvailable
@@ -104,6 +105,7 @@ func handleUltimateAvailableLastChance():
 	
 func handleDidNotUseUltimate():
 	ultimateAvailable = false
+	emit_signal("didNotUseUltimate")
 	print("didn't use ultimate")
 	
 		

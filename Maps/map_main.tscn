@@ -161,6 +161,7 @@ texture = ExtResource("11_8whw4")
 [connection signal="tenEnemiesKilled" from="." to="Player" method="_on_map_main_ten_enemies_killed"]
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
 [connection signal="dead" from="Player" to="Camera2D" method="_on_player_dead"]
+[connection signal="didNotUseUltimate" from="Player" to="UI/Ultimate/Tablet" method="_on_player_did_not_use_ultimate"]
 [connection signal="ultimateIsAvailable" from="Player" to="UI/Ultimate/Tablet" method="_on_player_ultimate_is_available"]
 [connection signal="usingUltimate" from="Player" to="." method="_on_player_using_ultimate"]
 [connection signal="usingUltimate" from="Player" to="UI/Ultimate/Tablet" method="_on_player_using_ultimate"]

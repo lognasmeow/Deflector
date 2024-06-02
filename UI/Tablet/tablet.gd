@@ -12,3 +12,7 @@ func _on_player_ultimate_is_available():
 
 func _on_player_using_ultimate():
 	animationPlayer.play("closeTablet")
+
+
+func _on_player_did_not_use_ultimate():
+	animationPlayer.play("closeTablet")
