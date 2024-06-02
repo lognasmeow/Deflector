@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1ka18gfrhea6"]
+[gd_scene load_steps=12 format=3 uid="uid://d1ka18gfrhea6"]
 
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_c847m"]
 [ext_resource type="Texture2D" uid="uid://bp7sp77mwbtc1" path="res://Assets/Enemies/fullSoldier.png" id="2_ycxjo"]
+[ext_resource type="AudioStream" uid="uid://6jgqgs15ohch" path="res://Assets/Sound/Sound Effects/DirectLaserAttack.wav" id="3_fducj"]
 
 [sub_resource type="Animation" id="Animation_xlorf"]
 resource_name = "die"
@@ -165,6 +166,10 @@ frame = 31
 libraries = {
 "": SubResource("AnimationLibrary_60rd1")
 }
+
+[node name="DirectLaserAttack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_fducj")
+bus = &"SFX"
 
 [connection signal="timeout" from="Telegraph" to="." method="_on_telegraph_timeout"]
 [connection signal="timeout" from="Rest" to="." method="_on_rest_timeout"]

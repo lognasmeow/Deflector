@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://biwcqqp45njwv"]
+[gd_scene load_steps=25 format=3 uid="uid://biwcqqp45njwv"]
 
 [ext_resource type="Script" path="res://Maps/map_main.gd" id="1_k01aj"]
 [ext_resource type="PackedScene" uid="uid://b3xmpvw4nbyv4" path="res://Player/player.tscn" id="1_xy87o"]
@@ -13,8 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://bkbed8cixjat2" path="res://Assets/UI/Containers/menu_button02.png" id="10_hmtfa"]
 [ext_resource type="Texture2D" uid="uid://4msdsj733hyu" path="res://Assets/Overlays/6.png" id="11_8whw4"]
 [ext_resource type="AudioStream" uid="uid://bh5r0a6u5cmxn" path="res://Assets/Sound/Sound Effects/DirectAttack.wav" id="13_t0gqe"]
+[ext_resource type="AudioStream" uid="uid://c31j28ikf1ktl" path="res://Assets/Sound/Sound Effects/CoordinatesReceived.wav" id="14_8or11"]
 [ext_resource type="AudioStream" uid="uid://baw4vec6c7p3u" path="res://Assets/Sound/Sound Effects/DigitalRearrange.wav" id="14_47etn"]
 [ext_resource type="AudioStream" uid="uid://cxkjvgwfwrpjl" path="res://Assets/Sound/Sound Effects/UnknownAttakStyle.wav" id="14_ftu6c"]
+[ext_resource type="AudioStream" uid="uid://qobawbaah2tq" path="res://Assets/Sound/Sound Effects/MultiPowerUpGrade.wav" id="14_l6b2d"]
 [ext_resource type="AudioStream" uid="uid://c8oounae2vq3e" path="res://Assets/Sound/Sound Effects/MiniHit.wav" id="14_oycqn"]
 
 [sub_resource type="Animation" id="Animation_iccox"]
@@ -253,6 +255,14 @@ texture = ExtResource("11_8whw4")
 
 [node name="DirectAttack" type="AudioStreamPlayer2D" parent="Sound"]
 stream = ExtResource("13_t0gqe")
+bus = &"SFX"
+
+[node name="CoordinatesReceived" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("14_8or11")
+bus = &"SFX"
+
+[node name="MultiPowerUpgrade" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("14_l6b2d")
 bus = &"SFX"
 
 [node name="DigitalRearrange" type="AudioStreamPlayer2D" parent="Sound"]

@@ -13,6 +13,7 @@ signal didNotUseUltimate
 @onready var bobUpTimer: Timer = $BobUp
 @onready var bobDownTimer: Timer = $BobDown
 @onready var textureAnimationPlayer: AnimationPlayer = $"../Camera2D/BloodTextureRect/Texture"
+@onready var coordinatesReceivedAudio: AudioStreamPlayer2D = $"../Sound/CoordinatesReceived"
 
 
 
@@ -97,6 +98,7 @@ func setSwordPosition(positionX: float, positionY: float, rotationDegrees: float
 func handleUltimateAvailable():
 	ultimateAvailable = true
 	ultimateAvailableTimer.start()
+	coordinatesReceivedAudio.play()
 	emit_signal("ultimateIsAvailable")
 	print("ultimate available")
 	

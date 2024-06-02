@@ -9,6 +9,7 @@ signal tenEnemiesKilled
 @onready var miniHitAudio: AudioStreamPlayer2D = $Sound/MiniHit
 @onready var unknownAttackStyleAudio: AudioStreamPlayer2D = $Sound/UnknownAttackStyle
 @onready var digitalRearrangeAudio: AudioStreamPlayer2D = $Sound/DigitalRearrange
+@onready var multiPowerUpgradeAudio: AudioStreamPlayer2D = $Sound/MultiPowerUpgrade
 
 
 var timeStart = 0
@@ -43,6 +44,7 @@ func _on_enemy_dead():
 
 
 func _on_player_dead():
+	multiPowerUpgradeAudio.play()
 	deathAnimationPlayer.play("showDeathUI")
 	deathTimer.start()
 

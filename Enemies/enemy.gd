@@ -11,6 +11,7 @@ signal dead
 @onready var map: Node2D = $"../.."
 @onready var player: Node2D = $"../../Player"
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+@onready var directLaserAttackAudio: AudioStreamPlayer2D = $DirectLaserAttack
 
 var isTelegraphing: bool = false
 var startingSpawnTime: float = 5
@@ -52,6 +53,7 @@ func attack():
 	if isAlive:
 		animationPlayer.play("shoot")
 		emit_signal("attacking")
+		directLaserAttackAudio.play()
 		rest()
 	
 func die():
