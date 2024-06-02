@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://biwcqqp45njwv"]
+[gd_scene load_steps=23 format=3 uid="uid://biwcqqp45njwv"]
 
 [ext_resource type="Script" path="res://Maps/map_main.gd" id="1_k01aj"]
 [ext_resource type="PackedScene" uid="uid://b3xmpvw4nbyv4" path="res://Player/player.tscn" id="1_xy87o"]
@@ -12,6 +12,10 @@
 [ext_resource type="Theme" uid="uid://poj0k2rqrxmj" path="res://Assets/UI/Themes/cyberphont.tres" id="10_7i24s"]
 [ext_resource type="Texture2D" uid="uid://bkbed8cixjat2" path="res://Assets/UI/Containers/menu_button02.png" id="10_hmtfa"]
 [ext_resource type="Texture2D" uid="uid://4msdsj733hyu" path="res://Assets/Overlays/6.png" id="11_8whw4"]
+[ext_resource type="AudioStream" uid="uid://bh5r0a6u5cmxn" path="res://Assets/Sound/Sound Effects/DirectAttack.wav" id="13_t0gqe"]
+[ext_resource type="AudioStream" uid="uid://baw4vec6c7p3u" path="res://Assets/Sound/Sound Effects/DigitalRearrange.wav" id="14_47etn"]
+[ext_resource type="AudioStream" uid="uid://cxkjvgwfwrpjl" path="res://Assets/Sound/Sound Effects/UnknownAttakStyle.wav" id="14_ftu6c"]
+[ext_resource type="AudioStream" uid="uid://c8oounae2vq3e" path="res://Assets/Sound/Sound Effects/MiniHit.wav" id="14_oycqn"]
 
 [sub_resource type="Animation" id="Animation_iccox"]
 length = 0.001
@@ -51,6 +55,21 @@ _data = {
 "showTexture": SubResource("Animation_ct1jb")
 }
 
+[sub_resource type="Animation" id="Animation_83twr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_1q0i3"]
 resource_name = "showDeathUI"
 length = 1.95
@@ -66,21 +85,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_83twr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_64ku7"]
@@ -244,6 +248,24 @@ offset_top = -66.0
 offset_right = 1006.0
 offset_bottom = 1134.0
 texture = ExtResource("11_8whw4")
+
+[node name="Sound" type="Node2D" parent="."]
+
+[node name="DirectAttack" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("13_t0gqe")
+bus = &"SFX"
+
+[node name="DigitalRearrange" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("14_47etn")
+bus = &"SFX"
+
+[node name="UnknownAttackStyle" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("14_ftu6c")
+bus = &"SFX"
+
+[node name="MiniHit" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("14_oycqn")
+bus = &"SFX"
 
 [connection signal="tenEnemiesKilled" from="." to="Player" method="_on_map_main_ten_enemies_killed"]
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]

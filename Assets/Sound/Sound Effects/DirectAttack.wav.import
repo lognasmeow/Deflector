@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bh5r0a6u5cmxn"
+path="res://.godot/imported/DirectAttack.wav-bc84db6c7faa68bc360dfd06f3cda34f.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound Effects/DirectAttack.wav"
+dest_files=["res://.godot/imported/DirectAttack.wav-bc84db6c7faa68bc360dfd06f3cda34f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

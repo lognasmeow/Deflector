@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c8oounae2vq3e"
+path="res://.godot/imported/MiniHit.wav-32c16707ca27ff375e20d62998f77182.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound Effects/MiniHit.wav"
+dest_files=["res://.godot/imported/MiniHit.wav-32c16707ca27ff375e20d62998f77182.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

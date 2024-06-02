@@ -15,6 +15,7 @@ signal didNotUseUltimate
 @onready var textureAnimationPlayer: AnimationPlayer = $"../Camera2D/BloodTextureRect/Texture"
 
 
+
 var deflectAvailable: bool = true
 var health: int = 1
 var ultimateAvailable: bool = false

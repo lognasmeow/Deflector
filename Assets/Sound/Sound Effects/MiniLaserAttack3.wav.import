@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dv8wu4ctv8g6s"
+path="res://.godot/imported/MiniLaserAttack3.wav-6d9b29d97ef554bf08b73dd4d756e7aa.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/Sound Effects/MiniLaserAttack3.wav"
+dest_files=["res://.godot/imported/MiniLaserAttack3.wav-6d9b29d97ef554bf08b73dd4d756e7aa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

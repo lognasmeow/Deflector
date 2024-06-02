@@ -10,3 +10,7 @@
 
 *** UI ***
 - Finnmercury
+
+*** Audio ***
+- Shapeforms
+- GameSupplyGuy

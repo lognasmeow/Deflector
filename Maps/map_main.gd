@@ -5,6 +5,11 @@ signal tenEnemiesKilled
 @onready var killsLabel: Label = $UI/Kills/KillsLabel
 @onready var deathAnimationPlayer: AnimationPlayer = $UI/Death/DeathAnimationPlayer
 @onready var deathTimer: Timer = $UI/Death/DeathTimer
+@onready var directAttackAudio: AudioStreamPlayer2D = $Sound/DirectAttack
+@onready var miniHitAudio: AudioStreamPlayer2D = $Sound/MiniHit
+@onready var unknownAttackStyleAudio: AudioStreamPlayer2D = $Sound/UnknownAttackStyle
+@onready var digitalRearrangeAudio: AudioStreamPlayer2D = $Sound/DigitalRearrange
+
 
 var timeStart = 0
 var currentTime = 0
@@ -26,10 +31,12 @@ func _input(event):
 			get_tree().reload_current_scene()
 
 func _on_enemy_dead():
+	directAttackAudio.play()
+	miniHitAudio.play()
 	enemiesKilled += 1
 	enemiesKilledSinceLastUltimate += 1
 	killsLabel.text = str(enemiesKilled)
-	if enemiesKilledSinceLastUltimate >= 10 and not enemiesKilledAlreadyReached:
+	if enemiesKilledSinceLastUltimate >= 1 and not enemiesKilledAlreadyReached:
 		emit_signal("tenEnemiesKilled")
 		print("ten enemies Killed")
 		enemiesKilledAlreadyReached = true
@@ -41,6 +48,8 @@ func _on_player_dead():
 
 
 func _on_player_using_ultimate():
+	unknownAttackStyleAudio.play()
+	digitalRearrangeAudio.play()
 	enemiesKilledSinceLastUltimate = 0
 	enemiesKilledAlreadyReached = false
 	
