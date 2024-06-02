@@ -41,7 +41,7 @@ func _on_enemy_dead():
 	enemiesKilled += 1
 	enemiesKilledSinceLastUltimate += 1
 	killsLabel.text = str(enemiesKilled)
-	if enemiesKilledSinceLastUltimate >= 15 and not enemiesKilledAlreadyReached:
+	if enemiesKilledSinceLastUltimate >= 10 and not enemiesKilledAlreadyReached:
 		emit_signal("tenEnemiesKilled")
 		print("ten enemies Killed")
 		enemiesKilledAlreadyReached = true
