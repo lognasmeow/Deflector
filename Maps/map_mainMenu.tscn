@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://b6ti2tpbeiedu"]
+
+[ext_resource type="Texture2D" uid="uid://duye17t5bnprw" path="res://Assets/Backgrounds/cyberpunk-street.png" id="1_1m8ku"]
+[ext_resource type="Script" path="res://Maps/map_mainMenu.gd" id="1_r38jw"]
+[ext_resource type="Texture2D" uid="uid://4msdsj733hyu" path="res://Assets/Overlays/6.png" id="2_htsmk"]
+[ext_resource type="Texture2D" uid="uid://bkbed8cixjat2" path="res://Assets/UI/Containers/menu_button02.png" id="3_3na71"]
+[ext_resource type="Script" path="res://Maps/mainMenuUI.gd" id="3_bd4kb"]
+[ext_resource type="Theme" uid="uid://poj0k2rqrxmj" path="res://Assets/UI/Themes/cyberphont.tres" id="5_issct"]
+[ext_resource type="Texture2D" uid="uid://c4hpnuad7jhg6" path="res://Assets/UI/Containers/Text_Screen01.png" id="7_drhtv"]
+
+[sub_resource type="Animation" id="Animation_rno3o"]
+resource_name = "play"
+length = 0.3
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpaceLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-168, -31.87)]
+}
+
+[sub_resource type="Animation" id="Animation_h4mc3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpaceLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-168, -43.765)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1xnbc"]
+_data = {
+"RESET": SubResource("Animation_h4mc3"),
+"play": SubResource("Animation_rno3o")
+}
+
+[node name="MapMainMenu" type="Node2D"]
+script = ExtResource("1_r38jw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 240)
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="TextureRect3" type="TextureRect" parent="Environment"]
+modulate = Color(0.107911, 0.459863, 1, 1)
+self_modulate = Color(0.707967, 0.707967, 0.707967, 1)
+z_index = -2
+texture_filter = 1
+offset_left = -416.0
+offset_top = -328.0
+offset_right = 192.0
+offset_bottom = -136.0
+scale = Vector2(5, 5)
+texture = ExtResource("1_1m8ku")
+
+[node name="TextureRect2" type="TextureRect" parent="Environment"]
+modulate = Color(1, 1, 1, 0.384314)
+z_index = -1
+offset_left = -794.0
+offset_top = -66.0
+offset_right = 1006.0
+offset_bottom = 1134.0
+texture = ExtResource("2_htsmk")
+
+[node name="UI" type="Node2D" parent="."]
+position = Vector2(320, 350.82)
+script = ExtResource("3_bd4kb")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI"]
+texture_filter = 1
+scale = Vector2(7, 6)
+texture = ExtResource("3_3na71")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_1xnbc")
+}
+
+[node name="SpaceLabel" type="Label" parent="UI"]
+texture_filter = 1
+offset_left = -168.0
+offset_top = -43.765
+offset_right = 177.0
+offset_bottom = 39.235
+theme = ExtResource("5_issct")
+theme_override_font_sizes/font_size = 26
+text = "PRESS SPACE
+TO PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+texture_filter = 1
+offset_left = -280.0
+offset_top = -297.05
+offset_right = -136.0
+offset_bottom = -252.05
+scale = Vector2(4, 4)
+texture = ExtResource("7_drhtv")
+
+[node name="Label" type="Label" parent="UI/TextureRect"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 16.5575
+offset_right = 124.0
+offset_bottom = 39.5575
+theme = ExtResource("5_issct")
+theme_override_font_sizes/font_size = 16
+text = "D3FLECT0R"
