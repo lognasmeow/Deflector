@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://biwcqqp45njwv"]
+[gd_scene load_steps=16 format=3 uid="uid://biwcqqp45njwv"]
 
 [ext_resource type="Script" path="res://Maps/map_main.gd" id="1_k01aj"]
 [ext_resource type="PackedScene" uid="uid://b3xmpvw4nbyv4" path="res://Player/player.tscn" id="1_xy87o"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d2s4afa1021yq" path="res://UI/Tablet/tablet.tscn" id="9_lc1iw"]
 [ext_resource type="Texture2D" uid="uid://duye17t5bnprw" path="res://Assets/Backgrounds/cyberpunk-street.png" id="10_4n84l"]
 [ext_resource type="Theme" uid="uid://poj0k2rqrxmj" path="res://Assets/UI/Themes/cyberphont.tres" id="10_7i24s"]
+[ext_resource type="Texture2D" uid="uid://bkbed8cixjat2" path="res://Assets/UI/Containers/menu_button02.png" id="10_hmtfa"]
 [ext_resource type="Texture2D" uid="uid://4msdsj733hyu" path="res://Assets/Overlays/6.png" id="11_8whw4"]
 
 [sub_resource type="Animation" id="Animation_iccox"]
@@ -135,6 +136,50 @@ texture_filter = 1
 position = Vector2(116.17, 61)
 scale = Vector2(1.795, 1.5)
 
+[node name="Death" type="Node2D" parent="UI"]
+position = Vector2(0, -29.98)
+
+[node name="KillsLabel" type="Label" parent="UI/Death"]
+z_index = 101
+texture_filter = 1
+offset_left = 193.33
+offset_top = 230.44
+offset_right = 458.33
+offset_bottom = 284.44
+theme = ExtResource("10_7i24s")
+text = "YOU DIED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Node2D" type="Node2D" parent="UI/Death"]
+z_index = 101
+position = Vector2(320.36, 349.725)
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Death/Node2D"]
+texture_filter = 1
+scale = Vector2(7, 6)
+texture = ExtResource("10_hmtfa")
+hframes = 2
+frame = 1
+
+[node name="SpaceLabel" type="Label" parent="UI/Death/Node2D"]
+texture_filter = 1
+offset_left = -168.0
+offset_top = -31.87
+offset_right = 177.0
+offset_bottom = 51.13
+theme = ExtResource("10_7i24s")
+theme_override_font_sizes/font_size = 26
+text = "PRESS SPACE
+TO restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeathAnimationPlayer" type="AnimationPlayer" parent="UI/Death"]
+
+[node name="DeathTimer" type="Timer" parent="UI/Death"]
+one_shot = true
+
 [node name="Environment" type="Node2D" parent="."]
 
 [node name="TextureRect3" type="TextureRect" parent="Environment"]
@@ -168,3 +213,4 @@ texture = ExtResource("11_8whw4")
 [connection signal="timeout" from="Spawn" to="Enemies" method="_on_spawn_timeout"]
 [connection signal="timeout" from="AnyEnemyTelegraphing" to="Enemies" method="_on_any_enemy_telegraphing_timeout"]
 [connection signal="timeout" from="Camera2D/Shake" to="Camera2D" method="_on_shake_timeout"]
+[connection signal="timeout" from="UI/Death/DeathTimer" to="." method="_on_death_timer_timeout"]

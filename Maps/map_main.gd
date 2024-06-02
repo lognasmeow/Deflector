@@ -3,19 +3,26 @@ extends Node2D
 signal tenEnemiesKilled
 
 @onready var killsLabel: Label = $UI/Kills/KillsLabel
+@onready var deathAnimationPlayer: AnimationPlayer = $UI/Death/DeathAnimationPlayer
+@onready var deathTimer: Timer = $UI/Death/DeathTimer
 
 var timeStart = 0
 var currentTime = 0
 var enemiesKilled: float = 0
 var enemiesKilledSinceLastUltimate: float = 0
 var enemiesKilledAlreadyReached: bool = false
+var pressSpaceToRestart: bool = false
 
 func _ready():
 	timeStart = int(Time.get_unix_time_from_system())
 
 func _process(_delta):
 	currentTime = int(Time.get_unix_time_from_system()) - timeStart
-
+	
+func _input(event):
+	if pressSpaceToRestart:
+		if event.is_action_pressed("space"):
+			get_tree().reload_current_scene()
 
 func _on_enemy_dead():
 	enemiesKilled += 1
@@ -28,10 +35,14 @@ func _on_enemy_dead():
 
 
 func _on_player_dead():
-	pass # show on UI
+	deathTimer.start()
 
 
 func _on_player_using_ultimate():
 	enemiesKilledSinceLastUltimate = 0
 	enemiesKilledAlreadyReached = false
 	
+
+
+func _on_death_timer_timeout():
+	pressSpaceToRestart = true

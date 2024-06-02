@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://co84ww3flgck3"]
+
+[ext_resource type="Texture2D" uid="uid://duye17t5bnprw" path="res://Assets/Backgrounds/cyberpunk-street.png" id="1_hsabd"]
+
+[sub_resource type="GDScript" id="GDScript_f5qbm"]
+script/source = "extends Node2D
+
+var mainMap = preload(\"res://Maps/map_main.tscn\")
+
+func _ready():
+	get_tree().change_scene_to_packed(mainMap)
+"
+
+[node name="MapDeath" type="Node2D"]
+script = SubResource("GDScript_f5qbm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 240)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(4.33177e-07, 0.315156, 0.485789, 1)
+self_modulate = Color(0.446777, 0.446777, 0.446777, 1)
+offset_left = -104.0
+offset_top = -232.0
+offset_right = 1656.0
+offset_bottom = 608.0
+texture = ExtResource("1_hsabd")
