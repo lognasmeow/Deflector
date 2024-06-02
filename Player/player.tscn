@@ -10,7 +10,7 @@ script = ExtResource("1_8iuxg")
 wait_time = 3.0
 
 [node name="UltimateAvailable" type="Timer" parent="."]
-wait_time = 80.0
+wait_time = 8000.0
 one_shot = true
 
 [node name="UltimateAvailableLastChance" type="Timer" parent="."]
