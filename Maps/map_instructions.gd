@@ -30,10 +30,10 @@ func _on_page_transition_timeout():
 		ultimateShown = true
 		pageTransitionTimer.start()
 	elif not creditsShown:
-		label.position.y = 50
+		label.position.y = 40
 		textureRect.visible = false
 		label.text = "CREDITS\n\nGAME BY LOGNASMEOW\n\n*** Sprites ***\n- TheWiseHedgehog\n- Jesse Eisenbart\n\n*** Backgrounds ***\n- ansimuz\n\n*** Overlays ***\n- 1up Indie\n\n*** UI ***\n- Finnmercury\n\n*** Audio ***\n-GameSupplyGuy\n- Shapeforms"
-		label.set("theme_override_font_sizes/font_size", 20)
+		label.set("theme_override_font_sizes/font_size", 15)
 		enemy1.visible = false
 		enemy2.visible = false
 		enemy3.visible = false

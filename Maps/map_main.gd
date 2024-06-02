@@ -18,6 +18,8 @@ var enemiesKilled: float = 0
 var enemiesKilledSinceLastUltimate: float = 0
 var enemiesKilledAlreadyReached: bool = false
 var pressSpaceToRestart: bool = false
+var playerDeadShown: bool = false
+var mainMenuMap = preload("res://Maps/map_mainMenu.tscn")
 
 func _ready():
 	deathAnimationPlayer.play("RESET")
@@ -27,6 +29,8 @@ func _process(_delta):
 	currentTime = int(Time.get_unix_time_from_system()) - timeStart
 	
 func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().change_scene_to_packed(mainMenuMap)
 	if pressSpaceToRestart:
 		if event.is_action_pressed("space"):
 			get_tree().reload_current_scene()
@@ -37,16 +41,18 @@ func _on_enemy_dead():
 	enemiesKilled += 1
 	enemiesKilledSinceLastUltimate += 1
 	killsLabel.text = str(enemiesKilled)
-	if enemiesKilledSinceLastUltimate >= 1 and not enemiesKilledAlreadyReached:
+	if enemiesKilledSinceLastUltimate >= 15 and not enemiesKilledAlreadyReached:
 		emit_signal("tenEnemiesKilled")
 		print("ten enemies Killed")
 		enemiesKilledAlreadyReached = true
 
 
 func _on_player_dead():
-	multiPowerUpgradeAudio.play()
-	deathAnimationPlayer.play("showDeathUI")
-	deathTimer.start()
+	if not playerDeadShown:
+		multiPowerUpgradeAudio.play()
+		deathAnimationPlayer.play("showDeathUI")
+		deathTimer.start()
+		playerDeadShown = true
 
 
 func _on_player_using_ultimate():
