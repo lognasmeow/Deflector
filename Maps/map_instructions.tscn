@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://7lhdm3ugjgqd"]
+
+[ext_resource type="Script" path="res://Maps/map_instructions.gd" id="1_vgfbr"]
+[ext_resource type="Texture2D" uid="uid://bp7sp77mwbtc1" path="res://Assets/Enemies/fullSoldier.png" id="2_lpi5n"]
+[ext_resource type="Texture2D" uid="uid://duye17t5bnprw" path="res://Assets/Backgrounds/cyberpunk-street.png" id="2_vg12t"]
+[ext_resource type="Texture2D" uid="uid://bbqbjbw5k3fpa" path="res://Assets/UI/Containers/scalable_Text_screen.png" id="3_pvlm4"]
+[ext_resource type="Theme" uid="uid://poj0k2rqrxmj" path="res://Assets/UI/Themes/cyberphont.tres" id="4_yiq8h"]
+
+[node name="MapInstructions" type="Node2D"]
+script = ExtResource("1_vgfbr")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(4.33177e-07, 0.315156, 0.485789, 1)
+self_modulate = Color(0.446777, 0.446777, 0.446777, 1)
+offset_left = -104.0
+offset_top = -232.0
+offset_right = 1656.0
+offset_bottom = 608.0
+texture = ExtResource("2_vg12t")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 240)
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2(248, 376)
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemies"]
+texture_filter = 1
+position = Vector2(6.54, 0)
+scale = Vector2(5, 5)
+texture = ExtResource("2_lpi5n")
+hframes = 7
+vframes = 7
+frame = 23
+
+[node name="Sprite2D2" type="Sprite2D" parent="Enemies"]
+texture_filter = 1
+position = Vector2(199.05, 0)
+scale = Vector2(5, 5)
+texture = ExtResource("2_lpi5n")
+hframes = 7
+vframes = 7
+frame = 24
+
+[node name="Sprite2D3" type="Sprite2D" parent="Enemies"]
+texture_filter = 1
+position = Vector2(391.185, 0)
+scale = Vector2(5, 5)
+texture = ExtResource("2_lpi5n")
+hframes = 7
+vframes = 7
+frame = 31
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Node2D"]
+texture_filter = 1
+offset_left = 40.0
+offset_right = 108.0
+offset_bottom = 40.0
+scale = Vector2(8, 8)
+texture = ExtResource("3_pvlm4")
+
+[node name="Label" type="Label" parent="Node2D"]
+texture_filter = 1
+offset_left = 120.0
+offset_top = 96.0
+offset_right = 515.0
+offset_bottom = 222.0
+theme = ExtResource("4_yiq8h")
+text = "PRESS SPACE TO 
+DEFLECT SHOTS 
+BACK AT ENEMIES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PageTransition" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="PageTransition" to="." method="_on_page_transition_timeout"]

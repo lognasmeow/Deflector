@@ -133,3 +133,9 @@ offset_bottom = 39.5575
 theme = ExtResource("5_issct")
 theme_override_font_sizes/font_size = 16
 text = "D3FLECT0R"
+
+[node name="NavigateToInstructions" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="NavigateToInstructions" to="." method="_on_navigate_to_instructions_timeout"]
