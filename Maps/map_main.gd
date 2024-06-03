@@ -19,7 +19,6 @@ var enemiesKilledSinceLastUltimate: float = 0
 var enemiesKilledAlreadyReached: bool = false
 var pressSpaceToRestart: bool = false
 var playerDeadShown: bool = false
-var mainMenuMap = preload("res://Maps/map_mainMenu.tscn")
 
 func _ready():
 	deathAnimationPlayer.play("RESET")
@@ -30,7 +29,7 @@ func _process(_delta):
 	
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().change_scene_to_packed(mainMenuMap)
+		get_tree().quit()
 	if pressSpaceToRestart:
 		if event.is_action_pressed("space"):
 			get_tree().reload_current_scene()
